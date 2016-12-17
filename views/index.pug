@@ -1,4 +1,29 @@
-extends layout
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
 
-block content
-    h1 Hello from Express
+  body
+    h1 API Basejump: Timestamp microservice
+    blockquote
+        p.
+            User stories:
+            <br>
+            1) I can pass a string as a parameter, and it will check to see whether that string contains either a unix timestamp or a natural language date (example: January 1, 2016) 
+            <br>
+            2) If it does, it returns both the Unix timestamp and the natural language form of that date.
+            <br>
+            3) If it does not contain a date or Unix timestamp, it returns null for those properties.
+
+    h2 Usage Example
+    code http://localhost:3000/January 10 2015 <br>
+    code http://localhost:3000/1420848000
+
+    h2 Output
+    code {"unix":1420848000,"natural":"January 10, 2015"}
+    
+    script(rel='text/javascript' src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous")
+    script(type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
+
