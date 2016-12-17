@@ -7,24 +7,27 @@ router.get('/', function (req, res, next) {
   res.render('index', { title: 'TimeStamp Microservice' });
 });
 
-
-router.get('/:timestamp', (req, res) => {
-  let time = moment(req.params.timestamp, 'MMMM DD, YYYY', true);
-  if (!time.isValid())
-    time = moment.unix(req.params.timestamp);
-
-  if (!time.isValid()) {
-    res.json({
-      'humanReadable': null,
-      'unix': null
-    });
+router.get('/:datestring', function(req,res) {
+  var myDate;
+  if(/^\d{8,}$/.test(req.params.datestring)) {
+    myDate = moment(req.params.datestring, "X");
+  } else {
+    myDate = moment(req.params.datestring, "MMMM D, YYYY");
   }
 
-  res.json({
-    'humanReadable': time.format('MMMM DD, YYYY'),
-    'unix': time.format('X')
-  });
+  if(myDate.isValid()) {
+    res.json({
+      unix: myDate.format("X"),
+      natural: myDate.format("MMMM D, YYYY")
+    });
+  } else {
+    res.json({
+      unix: null,
+      natural: null
+    });
+  }
 });
+
 
 
 module.exports = router;
